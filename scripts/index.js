@@ -72,7 +72,7 @@ function addPost (){
 }
 
 function getFullPost(id){
-  axios.get(`${baseURL}/posts${id}`)
+  axios.get(`${baseURL}/posts/${id}`)
     .then(result => {
       const {id, title, content} = result.data
       const newPost = { title, content }
