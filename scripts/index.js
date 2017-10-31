@@ -1,13 +1,14 @@
 const blogArea = document.getElementById('blog-area')
 const createBtn = document.getElementById('create')
 const error = document.getElementById('error')
+const baseURL = 'https://turtletime-blog.herokuapp.com'
 
 indexLoad()
 
 let blogArray = []
 
 function indexLoad(){
-  axios.get('http://localhost:3000/posts')
+  axios.get(`${baseURL}/posts`)
     .then(result => {
       blogArray = []
       let limit
@@ -60,7 +61,7 @@ function addPost (){
     return null
   }
   const config = { title, content}
-  axios.post('http://localhost:3000/posts', config)
+  axios.post(`${baseURL}/posts`, config)
     .then(result => {
       let data = result
       const id = data.data.id
@@ -71,7 +72,7 @@ function addPost (){
 }
 
 function getFullPost(id){
-  axios.get(`http://localhost:3000/posts/${id}`)
+  axios.get(`${baseURL}/posts${id}`)
     .then(result => {
       const {id, title, content} = result.data
       const newPost = { title, content }
