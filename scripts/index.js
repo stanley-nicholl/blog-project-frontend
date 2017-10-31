@@ -86,9 +86,29 @@ function getFullPost(id){
         const update = document.getElementById('update')
         update.addEventListener('click', (event) => {
           event.preventDefault()
-          addPost()
+          editPost(id)
         })
       })
     })
     .catch(err => console.log('ERROR:', err))
+}
+
+function editPost (id){
+  let post ={}
+  error.innerHTML = ``
+  const title = document.getElementById('title').value
+  const content = document.getElementById('content').value
+  if(!title || !content){
+    error.innerHTML = `Please enter a title and the post content`
+    return null
+  }
+  const config = { title, content}
+  axios.put(`${baseURL}/posts/${id}`, config)
+    .then(result => {
+      let data = result
+      const id = data.data.id
+      getFullPost(id)
+    })
+    .catch(err => console.log('ERROR:', err))
+  return post
 }
